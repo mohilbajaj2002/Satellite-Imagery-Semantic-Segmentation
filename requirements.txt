@@ -1,0 +1,7 @@
+numpy
+pandas
+opencv
+Pillow
+albumentations
+tensorflow
+matplotlib
