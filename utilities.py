@@ -125,3 +125,66 @@ def make_prediction(model, prediction_gen, prediction_plot_path):
 
           plt.savefig(os.path.join(prediction_plot_path, f'prediction_{count}.png'), facecolor= 'w', transparent= False, bbox_inches= 'tight', dpi= 200)
           plt.show()
+
+
+def raw_data_viz(original_image_path, original_mask_path, misc_data_exploration_path):
+    image = cv2.imread(original_image_path)
+    mask = cv2.imread(original_mask_path)
+    original_image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    original_mask = cv2.cvtColor(mask, cv2.COLOR_BGR2RGB)
+
+    fontsize = 16
+    f, ax = plt.subplots(2, 1, figsize=(16, 12), squeeze=True)
+    plt.tight_layout(w_pad=5, h_pad=5)
+
+    ax[0].imshow(original_image)
+    ax[0].set_title('Original Image', fontsize=fontsize)
+
+    ax[1].imshow(original_mask)
+    ax[1].set_title('Original Mask', fontsize=fontsize)
+
+    filename = original_image_path.split('/')[-1]
+    file_head = filename.split('.')[0]
+    plt.savefig(os.path.join(misc_data_exploration_path, f'explore_raw_data_{file_head}.png'), facecolor= 'w', transparent= False, bbox_inches= 'tight', dpi= 100)
+    plt.show()
+    
+
+def raw_vs_transformed_data_viz(transformed_image_path, transformed_mask_path, original_image_path, original_mask_path, misc_data_exploration_path):
+
+    original_image = cv2.imread(original_image_path)
+    original_mask = cv2.imread(original_mask_path)
+    transformed_image = cv2.imread(transformed_image_path)
+    transformed_mask = cv2.imread(transformed_mask_path)
+    original_image = cv2.cvtColor(original_image, cv2.COLOR_BGR2RGB)
+    original_mask = cv2.cvtColor(original_mask, cv2.COLOR_BGR2RGB)
+    transformed_image = cv2.cvtColor(transformed_image, cv2.COLOR_BGR2RGB)
+    transformed_mask = cv2.cvtColor(transformed_mask, cv2.COLOR_BGR2RGB)
+
+    fontsize = 16
+
+    if original_image is None and original_mask is None:
+        f, ax = plt.subplots(2, 1, figsize=(10, 10), squeeze=True)
+        f.set_tight_layout(h_pad=5, w_pad=5)
+
+        ax[0].imshow(transformed_image)
+        ax[1].imshow(transformed_mask)
+    else:
+        f, ax = plt.subplots(2, 2, figsize=(16, 12), squeeze=True)
+        plt.tight_layout(pad=0.2, w_pad=1.0, h_pad=0.01)
+
+        ax[0, 0].imshow(original_image)
+        ax[0, 0].set_title('Original Image', fontsize=fontsize)
+
+        ax[1, 0].imshow(original_mask)
+        ax[1, 0].set_title('Original Mask', fontsize=fontsize)
+
+        ax[0, 1].imshow(transformed_image)
+        ax[0, 1].set_title('Transformed Image', fontsize=fontsize)
+
+        ax[1, 1].imshow(transformed_mask)
+        ax[1, 1].set_title('Transformed Mask', fontsize=fontsize)
+
+    filename = original_image_path.split('/')[-1]
+    file_head = filename.split('.')[0]
+    plt.savefig(os.path.join(misc_data_exploration_path, f'explore_raw_vs_transformed_data_{file_head}.png'), facecolor= 'w', transparent= False, bbox_inches= 'tight', dpi= 100)
+    plt.show()

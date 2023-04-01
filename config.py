@@ -19,6 +19,7 @@ saved_model_folder = 'saved_model'
 saved_history_folder = 'saved_history'
 saved_history_plots_folder = 'saved_history_plots'
 prediction_plot_folder = 'prediction_plots'
+misc_data_exploration_folder = 'misc_data_exploration'
 
 root_path = os.path.dirname(os.path.realpath(sys.argv[0]))
 data_root_path = os.path.join(root_path, raw_data_folder)
@@ -26,6 +27,7 @@ saved_model_root_path = os.path.join(root_path, saved_model_folder)
 saved_history_root_path = os.path.join(root_path, saved_history_folder)
 saved_history_plots_path = os.path.join(root_path, saved_history_plots_folder)
 saved_prediction_plots_path = os.path.join(root_path, prediction_plot_folder)
+misc_data_exploration_path = os.path.join(root_path, misc_data_exploration_folder)
 
 # For data pre-processing and aumentation
 seed = 1  # for repeatability and image/mask matching
@@ -53,5 +55,8 @@ prediction_image_dir_path = os.path.join(data_root_path, 'aug_data_8', 'val', 'i
 prediction_mask_dir_path = os.path.join(data_root_path, 'aug_data_8', 'val', 'masks')
 
 # For data visualization
-#viz_type = 'raw_vs_augmented_data' # 'raw_data', 'raw_vs_augmented_data', 'model_training_history', 'predictions'
-#viz_model_name = ''
+viz_type = 'raw_vs_augmented_data' # 'raw_data', 'raw_vs_augmented_data'
+original_image_path = os.path.join(data_root_path, 'agg_data', 'images', 'image_Tile1_1.jpg')
+original_mask_path = os.path.join(data_root_path, 'agg_data', 'masks', 'image_Tile1_1.png')
+transformed_image_path = os.path.join(data_root_path, 'aug_data_8', 'train', 'images', 'img', 'aug_1_image_Tile1_1.jpg')
+transformed_mask_path = os.path.join(data_root_path, 'aug_data_8', 'train', 'masks', 'img', 'aug_1_image_Tile1_1.png')
