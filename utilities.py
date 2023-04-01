@@ -95,3 +95,33 @@ def get_input_shape(bb_name, input_shape):
         return (input_shape[0], input_shape[1])
     else:
         return (input_shape[2], input_shape[3])
+
+
+def make_prediction(model, prediction_gen, prediction_plot_path):
+  count = 0
+  for i in range(2):
+      batch_img, batch_mask = next(prediction_gen)
+      pred_all= model.predict(batch_img)
+      np.shape(pred_all)
+
+      for j in range(0,np.shape(pred_all)[0]):
+          count += 1
+          fig = plt.figure(figsize=(20,8))
+
+          ax1 = fig.add_subplot(1,2,1)
+          ax1.imshow(batch_img[j])
+          ax1.set_title('Input Image', fontdict={'fontsize': 16, 'fontweight': 'medium'})
+          ax1.grid(False)
+
+          #ax2 = fig.add_subplot(1,3,2)
+          #ax2.set_title('Ground Truth Mask', fontdict={'fontsize': 16, 'fontweight': 'medium'})
+          #ax2.imshow(onehot_to_rgb(batch_mask[j],id2code))
+          #ax2.grid(False)
+
+          ax3 = fig.add_subplot(1,2,2)
+          ax3.set_title('Predicted Mask', fontdict={'fontsize': 16, 'fontweight': 'medium'})
+          ax3.imshow(onehot_to_rgb(pred_all[j],id2code))
+          ax3.grid(False)
+
+          plt.savefig(os.path.join(prediction_plot_path, f'prediction_{count}.png'), facecolor= 'w', transparent= False, bbox_inches= 'tight', dpi= 200)
+          plt.show()

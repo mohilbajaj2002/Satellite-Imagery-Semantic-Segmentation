@@ -57,7 +57,7 @@ for aug_multiplier in augmentation_multiplier_list:
                                 datatype = aug_multiplier
                                 model_input_shape = (final_input_shape[0], final_input_shape[1], 3)
                                 model_name =  f'Attempt_{model_no}_UNet_{depth}_{bb_name}_augtype_{datatype}_imagesize_{final_input_shape[0]}_batchsize_{batch_size}_{opt_name}_learningrate_{learning_rate}_epochs_{epochs}'
-                                model_path = os.path.join(config.saved_model_root_path, model_name)
+                                model_path = os.path.join(config.saved_model_root_path, f'{model_name}.h5')
                                 history_path = os.path.join(config.saved_history_root_path, f'{model_name}.csv')
                                 model = arch.build_model(depth, bb_name, model_input_shape, num_classes, optimizer)
                                 steps_per_epoch, validation_steps = datagen.calculate_number_of_samples(config.data_root_path, train_image_folder, val_image_folder, batch_size)

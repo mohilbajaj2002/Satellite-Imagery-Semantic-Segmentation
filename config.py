@@ -18,12 +18,14 @@ aggregate_data_folder = 'agg_data'
 saved_model_folder = 'saved_model'
 saved_history_folder = 'saved_history'
 saved_history_plots_folder = 'saved_history_plots'
+prediction_plot_folder = 'prediction_plots'
 
 root_path = os.path.dirname(os.path.realpath(sys.argv[0]))
 data_root_path = os.path.join(root_path, raw_data_folder)
 saved_model_root_path = os.path.join(root_path, saved_model_folder)
 saved_history_root_path = os.path.join(root_path, saved_history_folder)
 saved_history_plots_path = os.path.join(root_path, saved_history_plots_folder)
+saved_prediction_plots_path = os.path.join(root_path, prediction_plot_folder)
 
 # For data pre-processing and aumentation
 seed = 1  # for repeatability and image/mask matching
@@ -45,8 +47,10 @@ learning_rate_list = [0.0001] # 0.0001, 0.0005, 0.001, 0.0015 etc.
 multiprocessing_toggle = False
 
 # for prediction
-best_model = ''
-prediction_image_path = ''
+prediction_model = 'Attempt_2_UNet_3_Resnet152_augtype_8_imagesize_256_batchsize_16_SGD_learningrate_0.0001_epochs_100.h5'
+prediction_batch_size = 8
+prediction_image_dir_path = os.path.join(data_root_path, 'aug_data_8', 'val', 'images')
+prediction_mask_dir_path = os.path.join(data_root_path, 'aug_data_8', 'val', 'masks')
 
 # For data visualization
 #viz_type = 'raw_vs_augmented_data' # 'raw_data', 'raw_vs_augmented_data', 'model_training_history', 'predictions'

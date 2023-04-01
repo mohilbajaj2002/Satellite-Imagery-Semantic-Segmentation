@@ -202,7 +202,7 @@ def train_model(model, epochs, train_generator, validation_generator, steps_per_
   #early_stopping_epoch = int(config.early_stopping_epoch_factor*epochs)
 
   lr_scheduler = LearningRateScheduler(scheduler, verbose=1)
-  checkpoint = ModelCheckpoint(filepath = model_path, save_best_only = True, save_weights_only = False, monitor = 'val_loss', mode = 'auto', verbose = 1)
+  checkpoint = ModelCheckpoint(filepath = model_path, save_best_only = True, monitor = 'val_loss', mode = 'auto', verbose = 1)
   earlystop = EarlyStopping(monitor = 'val_loss', min_delta = 0.001, patience = 12, mode = 'auto', verbose = 1, restore_best_weights = True)
   csvlogger = CSVLogger(filename = history_path, separator = ",", append = False)
   callbacks = [checkpoint, earlystop, csvlogger, lr_scheduler]
